@@ -1,4 +1,4 @@
-# Vue Boilerplate
+# SVG Component Demo
 
 Initially generate by the vue cli, it has just added some of the additional components;
 
