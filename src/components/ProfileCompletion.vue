@@ -8,12 +8,7 @@
         </linearGradient>
       </defs>
       <circle class="progress-bg" :r="radius" :stroke-width="stroke"></circle>
-      <circle class="progress-fg"
-        :r="radius"
-        :stroke-width="stroke"
-        :style="{ progress }"
-        :stroke-dasharray="circumference + ' ' + circumference"
-      ></circle>
+      <circle class="progress-fg" :r="radius" :stroke-width="stroke" :stroke-dashoffset="progress"></circle>
     </svg>
 
     <div class="inner-circle teal-bg rounded-full absolute">
@@ -40,6 +35,7 @@
 export default {
   data(){
     const circumference = this.radius * 2 * Math.PI;
+    console.log(circumference);
     return {
       heading: 'Profile:',
       subheading: 'complete',
@@ -79,6 +75,7 @@ $circumference: 364.42;
       width: $outerdiameter;
       height: $outerdiameter;
       fill: none;
+      // stroke-width: 8px;
       transform: translate(64px, 64px) rotate(-90deg) ;
       stroke-dasharray: $circumference;
 
