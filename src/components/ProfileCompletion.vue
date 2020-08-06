@@ -35,11 +35,11 @@
 export default {
   data(){
     const circumference = this.radius * 2 * Math.PI;
-    console.log(circumference);
     return {
       heading: 'Profile:',
       subheading: 'complete',
-      circumference
+      circumference,
+      currentprogress: 0
     }
   },
   props:{
@@ -48,10 +48,26 @@ export default {
     stroke: Number
   },
   computed: {
+    // returns the % progress as a calculation of the circumference
     progress: function () {
-      const progress = this.circumference - (this.circumference * (this.complete / 100));
+      const progress = this.circumference - (this.circumference * (this.currentprogress / 100));
       return progress;
     }
+  },
+  watch: {
+    complete: function (newVal, oldVal) {
+      if(oldVal !== newVal){
+        this.currentprogress = newVal;
+      }
+    }
+  },
+  created(){
+    this.currentprogress = this.complete;
+    const to = this.currentprogress;
+    this.currentprogress = 0;
+    setTimeout(() => {
+      this.currentprogress = to;
+    }, 500);
   }
 };
 </script>
@@ -75,7 +91,6 @@ $circumference: 364.42;
       width: $outerdiameter;
       height: $outerdiameter;
       fill: none;
-      // stroke-width: 8px;
       transform: translate(64px, 64px) rotate(-90deg) ;
       stroke-dasharray: $circumference;
 
@@ -84,9 +99,9 @@ $circumference: 364.42;
         stroke: #cdcdcd;
       }
       &.progress-fg{
-        stroke-linecap: round;
+        // stroke-linecap: round;
         will-change: auto;
-        transition: stroke-dashoffset 850ms ease-in-out;
+        transition: stroke-dashoffset 1s ease-in-out;
         stroke: url(#linear);
       }
     }

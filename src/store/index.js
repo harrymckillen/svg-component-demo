@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    completeness: 90
+    completeness: 100
   },
   mutations: {
     INCREMENT(state, amount) {
